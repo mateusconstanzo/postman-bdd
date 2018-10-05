@@ -1,0 +1,22 @@
+{
+  "name": "postman-bdd",
+  "version": "1.0.0",
+  "author": "Mateus Constanzo <mateusconstanzo@gmail.com>",
+  "repository": "https://github.com/mateusconstanzo/postman-bdd",
+  "homepage": "https://github.com/mateusconstanzo/postman-bdd",
+  "license": "ISC",
+  "description": "",
+  "keywords": [
+    "postman",
+    "bdd",
+    "tests"
+  ],
+  "main": "",
+  "scripts": {
+    "newman": "newman run postman_collection.json",
+    "newman-report": "newman run postman_collection.json -r html"
+  },
+  "dependencies": {
+    "newman": "^3.9.1"
+  }
+}

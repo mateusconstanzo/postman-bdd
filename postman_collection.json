@@ -1,0 +1,259 @@
+{
+	"info": {
+		"_postman_id": "febc989d-c041-4764-807d-f0bc3d22f49b",
+		"name": "Postman BDD - Exemplo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "01 - API",
+			"item": [
+				{
+					"name": "Users",
+					"item": [
+						{
+							"name": "List All Users",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1cd49466-4095-41e1-84d2-d79b983544c4",
+										"type": "text/javascript",
+										"exec": [
+											"",
+											"const user = {",
+											"    \"type\": \"object\",",
+											"    \"properties\": {",
+											"        \"id\": {",
+											"            \"type\": \"integer\"",
+											"        },",
+											"        \"username\": {",
+											"            \"type\": \"string\"",
+											"        },",
+											"        \"name\": {",
+											"            \"type\": \"string\"",
+											"        },",
+											"        \"lastname\": {",
+											"            \"type\": \"string\"",
+											"        }",
+											"    },",
+											"    \"required\": [",
+											"        \"id\",",
+											"        \"username\",",
+											"        \"name\",",
+											"        \"lastname\"",
+											"    ]",
+											"}",
+											"",
+											"const schema = {",
+											"    \"type\": \"object\",",
+											"    \"properties\": {",
+											"        \"totalPages\": {",
+											"            \"type\": \"integer\"",
+											"        },",
+											"        \"totalElements\": {",
+											"            \"type\": \"integer\"",
+											"        },",
+											"        \"content\": {",
+											"            \"type\": \"array\", \"items\": user",
+											"        }",
+											"    }",
+											"};",
+											"",
+											"pm.test('Response is valid', function () {",
+											"    pm.response.to.be.ok;",
+											"    pm.response.to.be.json;",
+											"});",
+											"",
+											"pm.test('Schema is valid', function () {",
+											"    pm.expect(",
+											"        tv4.validate(pm.response.json(), schema)",
+											"    ).to.be.true;",
+											"});",
+											"",
+											"pm.test('should return a list not empty', function () {",
+											"    pm.response.to.not.be.empty;",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+											"});"
+										]
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "4b4367e2-698d-48b8-a04d-72b8a5484091",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{api-url}}/users",
+									"host": [
+										"{{api-url}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a New User",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "10208da5-7021-4a70-a36a-c2219b239806",
+										"exec": [
+											"",
+											"const user = {",
+											"    \"type\": \"object\",",
+											"    \"properties\": {",
+											"        \"id\": {",
+											"            \"type\": \"integer\"",
+											"        },",
+											"        \"username\": {",
+											"            \"type\": \"string\"",
+											"        },",
+											"        \"name\": {",
+											"            \"type\": \"string\"",
+											"        },",
+											"        \"lastname\": {",
+											"            \"type\": \"string\"",
+											"        }",
+											"    },",
+											"    \"required\": [",
+											"        \"id\",",
+											"        \"username\",",
+											"        \"name\",",
+											"        \"lastname\"",
+											"    ]",
+											"}",
+											"",
+											"pm.test('Response is valid', function () {",
+											"    pm.response.to.have.status(201);",	
+											"    pm.response.to.be.json;",
+											"});",
+											"",
+											"pm.test('Schema is valid', function () {",
+											"    pm.expect(",
+											"        tv4.validate(pm.response.json(), user)",
+											"    ).to.be.true;",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(800);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"constanzo\",\n    \"name\": \"Constanzo\",\n    \"lastname\": \"Silva\"\n}"
+								},
+								"url": {
+									"raw": "{{api-url}}/users",
+									"host": [
+										"{{api-url}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "390075f1-5389-4b11-9d3d-0c770e9b5f88",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "7e0c6457-040c-4baa-a1e9-2360c9fc16d8",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "8f231757-23da-4372-8c8b-c9685bb19e3b",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "a806fa0a-9bfc-4fc7-9da8-0fdbf4781a43",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "9e05ed40-ad41-4153-bbcc-af1c2efb071c",
+				"type": "text/javascript",
+				"exec": [
+					"pm.environment.set('api-url', 'https://private-e8f3a9-postmanbdd.apiary-mock.com');"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "0bd2a0fc-aa54-48a8-bca2-a608710fa714",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
